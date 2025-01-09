@@ -56,7 +56,7 @@ resource "oci_containerengine_node_pool" "create_node_pool_details0" {
       availability_domain = "EXYG:AP-OSAKA-1-AD-1"
       subnet_id           = oci_core_subnet.node_subnet.id
     }
-    size = "4"
+    size = "3"
   }
   node_eviction_node_pool_settings {
     eviction_grace_duration = "PT1H"
