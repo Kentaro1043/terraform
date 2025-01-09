@@ -20,6 +20,10 @@ oci_ssh_key        = "ssh-ed25519 yourpublickey"
 （3台なのは私が残りの1台をデータ保存用サーバとして使っているため）
 
 ### 3. terraform実行
+initして
+```sh
+$ terraform init
+```
 planしてみて
 ```sh
 $ terraform plan
