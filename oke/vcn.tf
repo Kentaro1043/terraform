@@ -52,7 +52,7 @@ resource "oci_core_subnet" "service_lb_subnet" {
   dns_label                  = "okesvclbsubnet"
   prohibit_public_ip_on_vnic = "false"
   route_table_id             = oci_core_default_route_table.oke_public-routetable.id
-  security_list_ids          = ["${oci_core_vcn.oke_vcn.default_security_list_id}"]
+  security_list_ids          = [oci_core_vcn.oke_vcn.default_security_list_id, oci_core_security_list.service_lb_sec_list.id]
   vcn_id                     = oci_core_vcn.oke_vcn.id
 }
 

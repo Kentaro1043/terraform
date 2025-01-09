@@ -2,6 +2,24 @@ resource "oci_core_security_list" "service_lb_sec_list" {
   compartment_id = oci_identity_compartment.oke.id
   display_name   = "oke_svclbseclist"
   vcn_id         = oci_core_vcn.oke_vcn.id
+  ingress_security_rules {
+    description = "Allow http traffic"
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    tcp_options {
+      max = 80
+      min = 80
+    }
+  }
+  ingress_security_rules {
+    description = "Allow https traffic"
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    tcp_options {
+      max = 443
+      min = 443
+    }
+  }
 }
 
 resource "oci_core_security_list" "node_sec_list" {
