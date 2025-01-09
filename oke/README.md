@@ -33,7 +33,7 @@ $ terraform plan
 $ terraform apply
 ```
 
-#### 4. Kubernetesへのアクセス
+### 4. Kubernetesへのアクセス
 CloudコンソールのOKEのページに行き、作成されたリソースを見る。ない場合、新しいコンパートメントがちゃんと選択されているかもチェックする。  
 Quick Startにコマンドがあるので、これを使ってkubeconfigを入手する。あとは`kubectl`なりLensなりよしなに
 
