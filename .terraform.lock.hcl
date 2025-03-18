@@ -4,6 +4,7 @@
 provider "registry.terraform.io/hashicorp/oci" {
   version = "6.30.0"
   hashes = [
+    "h1:nZQsztTuo8lzlnCPqh6QY3Jmak/PJQ3HlW6THvZySDg=",
     "h1:tPI3veFwjfIIAB8RGYzi1N1LTrcdZJ6bNoqGnsqnJig=",
     "zh:1c805ac2f3f6256f26026eded79d5a6ff130f06d7729656dc5321fa1ecfeafe2",
     "zh:200968ed8e2299e52edb8660137cd783fde6152ff3b9f0f5b111bf88b4417081",
