@@ -1,8 +1,8 @@
 resource "oci_core_instance" "oci_compute" {
   availability_domain = "EXYG:AP-OSAKA-1-AD-1"
   compartment_id      = oci_identity_compartment.oke_compartment.id
-  display_name = "oci_compute"
-  shape = "VM.Standard.A1.Flex"
+  display_name        = "oci_compute"
+  shape               = "VM.Standard.A1.Flex"
   shape_config {
     memory_in_gbs = "6"
     ocpus         = "1"
