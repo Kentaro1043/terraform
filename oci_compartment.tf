@@ -1,7 +1,7 @@
-resource "oci_identity_compartment" "data_compartment" {
+resource "oci_identity_compartment" "compute_compartment" {
   compartment_id = var.oci_compartment_id
-  description    = "The compartment for the data server"
-  name           = "data_compartment"
+  description    = "The compartment for the compute instance"
+  name           = "compute_compartment"
 }
 
 resource "oci_identity_compartment" "oke_compartment" {
