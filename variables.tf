@@ -6,7 +6,21 @@ variable "oci_compartment_id" {
 variable "gcp_project_id" {
   description = "The GCP project ID"
   type        = string
+}
 
+variable "cloudflare_api_token" {
+  description = "The Cloudflare API token"
+  type        = string
+}
+
+variable "cloudflare_zone_id" {
+  description = "The Cloudflare zone ID"
+  type        = string
+}
+
+variable "cloudflare_account_id" {
+  description = "The Cloudflare account ID"
+  type        = string
 }
 
 variable "ssh_key" {
