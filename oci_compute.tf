@@ -19,7 +19,7 @@ resource "oci_core_instance" "oci_compute" {
     assign_private_dns_record = "true"
     assign_public_ip          = "false"
     display_name              = "oci_compute_vnic"
-    subnet_id                 = oci_core_vcn.oke_vcn.id
+    subnet_id                 = oci_core_subnet.node_subnet.id
   }
   metadata = {
     "ssh_authorized_keys" = var.ssh_key

@@ -23,7 +23,7 @@ resource "oci_containerengine_cluster" "oke_cluster" {
   vcn_id = oci_core_vcn.oke_vcn.id
 }
 
-resource "oci_containerengine_node_pool" "create_node_pool_details0" {
+resource "oci_containerengine_node_pool" "oke_nodepool" {
   cluster_id     = oci_containerengine_cluster.oke_cluster.id
   compartment_id = oci_identity_compartment.oke_compartment.id
   initial_node_labels {
@@ -53,7 +53,7 @@ resource "oci_containerengine_node_pool" "create_node_pool_details0" {
   }
   node_source_details {
     boot_volume_size_in_gbs = "50"
-    image_id                = "ocid1.image.oc1.ap-osaka-1.aaaaaaaapf6tkv5hxeqwfzxfpfdcopphcgb5vyr7gw3dga3esm5vmzuzd5ga"
+    image_id                = "ocid1.image.oc1.ap-osaka-1.aaaaaaaamzorzmx7heb2kx3knzimrlxw3r27ypwemnccidt6wugy37ffyeuq"
     source_type             = "IMAGE"
   }
   ssh_public_key = var.ssh_key
