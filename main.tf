@@ -30,15 +30,3 @@ provider "google" {
 provider "cloudflare" {
   api_token = var.cloudflare_api_token
 }
-
-resource "google_storage_bucket" "gcs_tfstate_bucket" {
-  name          = "gcs-tfstate-kentaro"
-  storage_class = "STANDARD"
-  location      = "US-WEST1"
-
-  uniform_bucket_level_access = false
-
-  versioning {
-    enabled = false
-  }
-}
