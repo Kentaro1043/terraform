@@ -8,8 +8,13 @@ variable "gcp_project_id" {
   type        = string
 }
 
-variable "cloudflare_api_token" {
-  description = "The Cloudflare API token"
+variable "cloudflare_email" {
+  description = "The Cloudflare email address"
+  type        = string
+}
+
+variable "cloudflare_api_key" {
+  description = "The Cloudflare API key"
   type        = string
 }
 
