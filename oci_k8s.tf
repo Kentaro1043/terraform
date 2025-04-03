@@ -1,22 +1,15 @@
 resource "oci_containerengine_cluster" "oke_cluster" {
+  name               = "oke_cluster"
+  compartment_id = oci_identity_compartment.oke_compartment.id
+  kubernetes_version = "v1.32.1"
   cluster_pod_network_options {
     cni_type = "FLANNEL_OVERLAY"
   }
-  compartment_id = oci_identity_compartment.oke_compartment.id
   endpoint_config {
     is_public_ip_enabled = "true"
     subnet_id            = oci_core_subnet.kubernetes_api_endpoint_subnet.id
   }
-  kubernetes_version = "v1.32.1"
-  name               = "oke_cluster"
   options {
-    admission_controller_options {
-      is_pod_security_policy_enabled = "false"
-    }
-    persistent_volume_config {
-    }
-    service_lb_config {
-    }
     service_lb_subnet_ids = [oci_core_subnet.service_lb_subnet.id]
   }
   type   = "BASIC_CLUSTER"
@@ -24,14 +17,14 @@ resource "oci_containerengine_cluster" "oke_cluster" {
 }
 
 resource "oci_containerengine_node_pool" "oke_nodepool" {
+  name               = "oke_nodepool"
   cluster_id     = oci_containerengine_cluster.oke_cluster.id
   compartment_id = oci_identity_compartment.oke_compartment.id
+  kubernetes_version = "v1.32.1"
   initial_node_labels {
     key   = "name"
     value = "oke_cluster"
   }
-  kubernetes_version = "v1.32.1"
-  name               = "oke_nodepool"
   node_config_details {
     is_pv_encryption_in_transit_enabled = "true"
     node_pool_pod_network_option_details {
@@ -42,9 +35,6 @@ resource "oci_containerengine_node_pool" "oke_nodepool" {
       subnet_id           = oci_core_subnet.node_subnet.id
     }
     size = "3"
-  }
-  node_eviction_node_pool_settings {
-    eviction_grace_duration = "PT1H"
   }
   node_shape = "VM.Standard.A1.Flex"
   node_shape_config {

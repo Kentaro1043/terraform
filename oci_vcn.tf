@@ -1,26 +1,26 @@
 resource "oci_core_vcn" "oke_vcn" {
-  cidr_block     = "10.0.0.0/16"
-  compartment_id = oci_identity_compartment.oke_compartment.id
   display_name   = "oke_vcn"
+  compartment_id = oci_identity_compartment.oke_compartment.id
+  cidr_block     = "10.0.0.0/16"
   dns_label      = "okevcn"
 }
 
 resource "oci_core_internet_gateway" "oke_ig" {
-  compartment_id = oci_identity_compartment.oke_compartment.id
   display_name   = "oke_ig"
+  compartment_id = oci_identity_compartment.oke_compartment.id
   enabled        = "true"
   vcn_id         = oci_core_vcn.oke_vcn.id
 }
 
 resource "oci_core_nat_gateway" "oke_ngw" {
-  compartment_id = oci_identity_compartment.oke_compartment.id
   display_name   = "oke_ngw"
+  compartment_id = oci_identity_compartment.oke_compartment.id
   vcn_id         = oci_core_vcn.oke_vcn.id
 }
 
 resource "oci_core_service_gateway" "oke_sgw" {
-  compartment_id = oci_identity_compartment.oke_compartment.id
   display_name   = "oke_sgw"
+  compartment_id = oci_identity_compartment.oke_compartment.id
   services {
     service_id = "ocid1.service.oc1.ap-osaka-1.aaaaaaaanpw2x646vasmcdktlznzhf7mwmcgf4hhmw5zepgspmseokxjyj4q"
   }
@@ -28,8 +28,8 @@ resource "oci_core_service_gateway" "oke_sgw" {
 }
 
 resource "oci_core_route_table" "oke_routetable" {
-  compartment_id = oci_identity_compartment.oke_compartment.id
   display_name   = "oke_routetable"
+  compartment_id = oci_identity_compartment.oke_compartment.id
   route_rules {
     description       = "traffic to the internet"
     destination       = "0.0.0.0/0"
@@ -46,9 +46,9 @@ resource "oci_core_route_table" "oke_routetable" {
 }
 
 resource "oci_core_subnet" "service_lb_subnet" {
+  display_name               = "oke_svclbsubnet"
   cidr_block                 = "10.0.20.0/24"
   compartment_id             = oci_identity_compartment.oke_compartment.id
-  display_name               = "oke_svclbsubnet"
   dns_label                  = "okesvclbsubnet"
   prohibit_public_ip_on_vnic = "false"
   route_table_id             = oci_core_default_route_table.oke_public-routetable.id
@@ -57,9 +57,9 @@ resource "oci_core_subnet" "service_lb_subnet" {
 }
 
 resource "oci_core_subnet" "node_subnet" {
+  display_name               = "oke_nodesubnet"
   cidr_block                 = "10.0.10.0/24"
   compartment_id             = oci_identity_compartment.oke_compartment.id
-  display_name               = "oke_nodesubnet"
   dns_label                  = "okenodesubnet"
   prohibit_public_ip_on_vnic = "true"
   route_table_id             = oci_core_route_table.oke_routetable.id
@@ -68,9 +68,9 @@ resource "oci_core_subnet" "node_subnet" {
 }
 
 resource "oci_core_subnet" "kubernetes_api_endpoint_subnet" {
+  display_name               = "oke_k8sapisubnet"
   cidr_block                 = "10.0.0.0/28"
   compartment_id             = oci_identity_compartment.oke_compartment.id
-  display_name               = "oke_k8sapisubnet"
   dns_label                  = "okek8sapi"
   prohibit_public_ip_on_vnic = "false"
   route_table_id             = oci_core_default_route_table.oke_public-routetable.id

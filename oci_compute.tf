@@ -1,7 +1,7 @@
 resource "oci_core_instance" "oci_compute" {
-  availability_domain = "EXYG:AP-OSAKA-1-AD-1"
-  compartment_id      = oci_identity_compartment.compute_compartment.id
   display_name        = "oci_compute"
+  compartment_id      = oci_identity_compartment.compute_compartment.id
+  availability_domain = "EXYG:AP-OSAKA-1-AD-1"
   shape               = "VM.Standard.A1.Flex"
   shape_config {
     memory_in_gbs = "6"
@@ -17,7 +17,7 @@ resource "oci_core_instance" "oci_compute" {
   create_vnic_details {
     assign_ipv6ip             = "false"
     assign_private_dns_record = "true"
-    assign_public_ip          = "false"
+    assign_public_ip          = "true"
     display_name              = "oci_compute_vnic"
     subnet_id                 = oci_core_subnet.node_subnet.id
   }
