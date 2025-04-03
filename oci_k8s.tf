@@ -1,6 +1,6 @@
 resource "oci_containerengine_cluster" "oke_cluster" {
   name               = "oke_cluster"
-  compartment_id = oci_identity_compartment.oke_compartment.id
+  compartment_id     = oci_identity_compartment.oke_compartment.id
   kubernetes_version = "v1.32.1"
   cluster_pod_network_options {
     cni_type = "FLANNEL_OVERLAY"
@@ -18,8 +18,8 @@ resource "oci_containerengine_cluster" "oke_cluster" {
 
 resource "oci_containerengine_node_pool" "oke_nodepool" {
   name               = "oke_nodepool"
-  cluster_id     = oci_containerengine_cluster.oke_cluster.id
-  compartment_id = oci_identity_compartment.oke_compartment.id
+  cluster_id         = oci_containerengine_cluster.oke_cluster.id
+  compartment_id     = oci_identity_compartment.oke_compartment.id
   kubernetes_version = "v1.32.1"
   initial_node_labels {
     key   = "name"
