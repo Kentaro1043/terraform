@@ -18,6 +18,7 @@ resource "google_compute_instance" "gce_compute" {
 
 
   network_interface {
+    subnetwork = "projects/${var.gcp_project_id}/regions/us-west1/subnetworks/default"
     access_config {
       network_tier = "STANDARD"
     }
