@@ -27,8 +27,20 @@ resource "oci_core_service_gateway" "oke_sgw" {
   vcn_id = oci_core_vcn.oke_vcn.id
 }
 
+resource "oci_core_default_route_table" "oke_public-routetable" {
+  display_name               = "oke_public-routetable"
+  manage_default_resource_id = oci_core_vcn.oke_vcn.default_route_table_id
+  route_rules {
+    description       = "traffic to/from internet"
+    destination       = "0.0.0.0/0"
+    destination_type  = "CIDR_BLOCK"
+    network_entity_id = oci_core_internet_gateway.oke_ig.id
+  }
+}
+
 resource "oci_core_route_table" "oke_routetable" {
   display_name   = "oke_routetable"
+  vcn_id         = oci_core_vcn.oke_vcn.id
   compartment_id = oci_identity_compartment.oke_compartment.id
   route_rules {
     description       = "traffic to the internet"
@@ -42,7 +54,6 @@ resource "oci_core_route_table" "oke_routetable" {
     destination_type  = "SERVICE_CIDR_BLOCK"
     network_entity_id = oci_core_service_gateway.oke_sgw.id
   }
-  vcn_id = oci_core_vcn.oke_vcn.id
 }
 
 resource "oci_core_subnet" "service_lb_subnet" {
@@ -76,15 +87,4 @@ resource "oci_core_subnet" "kubernetes_api_endpoint_subnet" {
   route_table_id             = oci_core_default_route_table.oke_public-routetable.id
   security_list_ids          = ["${oci_core_security_list.kubernetes_api_endpoint_sec_list.id}"]
   vcn_id                     = oci_core_vcn.oke_vcn.id
-}
-
-resource "oci_core_default_route_table" "oke_public-routetable" {
-  display_name = "oke_public-routetable"
-  route_rules {
-    description       = "traffic to/from internet"
-    destination       = "0.0.0.0/0"
-    destination_type  = "CIDR_BLOCK"
-    network_entity_id = oci_core_internet_gateway.oke_ig.id
-  }
-  manage_default_resource_id = oci_core_vcn.oke_vcn.default_route_table_id
 }
