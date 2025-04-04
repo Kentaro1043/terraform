@@ -28,6 +28,6 @@ resource "google_compute_instance" "gce_compute" {
   tags = ["http-server", "https-server"]
 
   metadata = {
-    ssh-keys = var.ssh_key
+    ssh-keys = "kentaro:${var.ssh_key}"
   }
 }
