@@ -2,6 +2,10 @@ output "oci_compute_public_ip" {
   value = oci_core_instance.oci_compute.public_ip
 }
 
+output "oci_compute_private_ip" {
+  value = oci_core_instance.oci_compute.private_ip
+}
+
 output "oci_compute_priavte_ip_for_node_sb" {
   value = oci_core_vnic_attachment.compute_vnic.create_vnic_details[0].private_ip
 }
