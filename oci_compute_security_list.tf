@@ -3,12 +3,30 @@ resource "oci_core_security_list" "compute_default-security-list" {
   display_name   = "compute_default-security-list"
   vcn_id         = oci_core_vcn.compute_vcn.id
   ingress_security_rules {
-    description = "SSH Remote Login Protocol"
+    description = "SSH"
     protocol    = "6"
     source      = "0.0.0.0/0"
     tcp_options {
       max = 22
       min = 22
+    }
+  }
+  ingress_security_rules {
+    description = "HTTP"
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    tcp_options {
+      max = 80
+      min = 80
+    }
+  }
+  ingress_security_rules {
+    description = "HTTPS"
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    tcp_options {
+      max = 443
+      min = 443
     }
   }
   ingress_security_rules {
@@ -44,9 +62,9 @@ resource "oci_core_security_list" "compute_private-security-list" {
   display_name   = "compute_private-security-list"
   vcn_id         = oci_core_vcn.compute_vcn.id
   ingress_security_rules {
-    description = "SSH Remote Login Protocol"
+    description = "SSH"
     protocol    = "6"
-    source      = "10.1.0.0/16"
+    source      = "0.0.0.0/0"
     tcp_options {
       max = 22
       min = 22
