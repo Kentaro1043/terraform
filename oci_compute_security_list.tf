@@ -12,24 +12,6 @@ resource "oci_core_security_list" "compute_default-security-list" {
     }
   }
   ingress_security_rules {
-    description = "HTTP"
-    protocol    = "6"
-    source      = "0.0.0.0/0"
-    tcp_options {
-      max = 80
-      min = 80
-    }
-  }
-  ingress_security_rules {
-    description = "HTTPS"
-    protocol    = "6"
-    source      = "0.0.0.0/0"
-    tcp_options {
-      max = 443
-      min = 443
-    }
-  }
-  ingress_security_rules {
     description = "Destination Unreachable: Fragmentation Needed and Don't Fragment was Set"
     icmp_options {
       code = "4"
