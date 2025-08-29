@@ -1,7 +1,7 @@
 resource "oci_containerengine_cluster" "oke_cluster" {
   name               = "oke_cluster"
   compartment_id     = oci_identity_compartment.oke_compartment.id
-  kubernetes_version = "v1.32.1"
+  kubernetes_version = "v1.33.1"
   cluster_pod_network_options {
     cni_type = "FLANNEL_OVERLAY"
   }
@@ -20,7 +20,7 @@ resource "oci_containerengine_node_pool" "oke_nodepool" {
   name               = "oke_nodepool"
   cluster_id         = oci_containerengine_cluster.oke_cluster.id
   compartment_id     = oci_identity_compartment.oke_compartment.id
-  kubernetes_version = "v1.32.1"
+  kubernetes_version = "v1.33.1"
   initial_node_labels {
     key   = "name"
     value = "oke_cluster"
@@ -43,7 +43,7 @@ resource "oci_containerengine_node_pool" "oke_nodepool" {
   }
   node_source_details {
     boot_volume_size_in_gbs = "50"
-    image_id                = "ocid1.image.oc1.ap-osaka-1.aaaaaaaamzorzmx7heb2kx3knzimrlxw3r27ypwemnccidt6wugy37ffyeuq"
+    image_id                = "ocid1.image.oc1.ap-osaka-1.aaaaaaaalrdd6cty4i5qxi2e5bret32lhfkbxqwgjpf52lw5efayyrivbeda"
     source_type             = "IMAGE"
   }
   ssh_public_key = var.ssh_key
