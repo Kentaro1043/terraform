@@ -25,7 +25,7 @@ resource "google_compute_instance" "gce_compute" {
     stack_type = "IPV4_ONLY"
   }
 
-  tags = ["http-server", "https-server"]
+  tags = ["http-server", "https-server", "custom-ssh"]
 
   metadata = {
     ssh-keys = "kentaro:${var.ssh_key}"
