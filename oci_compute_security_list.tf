@@ -12,6 +12,15 @@ resource "oci_core_security_list" "compute_default-security-list" {
     }
   }
   ingress_security_rules {
+    description = "Custom SSH"
+    protocol    = "6"
+    source      = "0.0.0.0/0"
+    tcp_options {
+      max = 50022
+      min = 50022
+    }
+  }
+  ingress_security_rules {
     description = "Destination Unreachable: Fragmentation Needed and Don't Fragment was Set"
     icmp_options {
       code = "4"
@@ -28,6 +37,15 @@ resource "oci_core_security_list" "compute_default-security-list" {
     }
     protocol  = "1"
     source    = "10.1.0.0/16"
+    stateless = "false"
+  }
+  ingress_security_rules {
+    description = "ping"
+    icmp_options {
+      type = "8"
+    }
+    protocol  = "1"
+    source    = "0.0.0.0/0"
     stateless = "false"
   }
   egress_security_rules {
