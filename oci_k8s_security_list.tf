@@ -20,6 +20,15 @@ resource "oci_core_security_list" "service_lb_sec_list" {
       min = 443
     }
   }
+  ingress_security_rules {
+    description = "Allow Minecraft BE traffic"
+    protocol    = "17"
+    source      = "0.0.0.0/0"
+    udp_options {
+      max = 19132
+      min = 19132
+    }
+  }
 }
 
 resource "oci_core_security_list" "node_sec_list" {
